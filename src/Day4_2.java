@@ -109,13 +109,4 @@ public class Day4_2 {
 	public static void main(String[] args) {
 		new Day4_2();
 	}
-	
-	private class Letter{
-		char letter;
-		int occurrences = 0;
-		Letter(char letter){
-			this.letter = letter;
-			this.occurrences = 1;
-		}
-	}
 }

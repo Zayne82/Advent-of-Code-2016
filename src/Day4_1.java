@@ -80,14 +80,5 @@ public class Day4_1 {
 	
 	public static void main(String[] args) {
 		new Day4_1();
-	}
-	
-	private class Letter{
-		char letter;
-		int occurrences = 0;
-		Letter(char letter){
-			this.letter = letter;
-			this.occurrences = 1;
-		}
-	}
+	}	
 }
