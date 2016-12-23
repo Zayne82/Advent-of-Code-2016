@@ -1,8 +1,8 @@
 import java.util.Vector;
 
-public class Day6_1 {
-	Day6_1(){
-		//String[] input = new FileReader().readLines("input/Day6_1_validation.txt"); //Should give answer 'easter'.
+public class Day6_2 {
+	Day6_2(){
+		//String[] input = new FileReader().readLines("input/Day6_1_validation.txt"); //Should give answer 'advent'.
 		String[] input = new FileReader().readLines("input/Day6_1_input.txt");
 		
 		char[] corrected = new char[input[0].length()];
@@ -12,13 +12,13 @@ public class Day6_1 {
 				//System.out.println("Getting character: " + input[j].charAt(i));
 				column[j] = input[j].charAt(i);
 			}
-			corrected[i] = getMostCommonLetter(column);
+			corrected[i] = getLeastCommonLetter(column);
 		}
 		System.out.println("Error corrected message: " + new String(corrected));
 		
 	}
 	
-	private char getMostCommonLetter(char[] input){
+	private char getLeastCommonLetter(char[] input){
 		Vector<Letter> letters = new Vector<Letter>();
 		
 		//Create a vector of letters and their number of occurrences.
@@ -42,17 +42,17 @@ public class Day6_1 {
 		}
 		
 		
-		//Find out the maximum number of times a letter occurs.
-		int highestOccurrence = 0;
+		//Find out the minimum number of times a letter occurs.
+		int lowestOccurrence = input.length;
 		for(int i = 0; i < letters.size(); i++){
-			if(letters.elementAt(i).occurrences > highestOccurrence){
-				highestOccurrence = letters.elementAt(i).occurrences;
+			if(letters.elementAt(i).occurrences < lowestOccurrence){
+				lowestOccurrence = letters.elementAt(i).occurrences;
 			}
 		}
 		
 		//Return the most common letter.
 		for(int i = 0; i < letters.size(); i++){
-			if(letters.elementAt(i).occurrences == highestOccurrence){
+			if(letters.elementAt(i).occurrences == lowestOccurrence){
 				return letters.elementAt(i).letter;
 			}
 		}
@@ -63,6 +63,6 @@ public class Day6_1 {
 	}
 
 	public static void main(String[] args) {
-		new Day6_1();
+		new Day6_2();
 	}
 }
