@@ -1,6 +1,7 @@
 
 public class Day7_2 {
 	Day7_2(){
+		
 		String[] input = new FileReader().readLines("input/Day7_1_input.txt");
 		int numValid = 0;
 		for(int i = 0; i < input.length; i++){
@@ -13,19 +14,13 @@ public class Day7_2 {
 	}
 	
 	private boolean validateInput(String input){
-		String[] parts = getHypernetSequences(input);
-		for(int i = 0; i < parts.length; i++){
-			if(containsABBA(parts[i])){
-				return false;
-			}
-		}
-		parts = getSupernetSequences(input);
-		for(int i = 0; i < parts.length; i++){
-			if(containsABBA(parts[i])){
+		String[] hyperParts = getHypernetSequences(input);
+		String[] superParts = getSupernetSequences(input); 
+		for(int i = 0; i < superParts.length; i++){
+			if(containsABA(superParts[i], hyperParts)){
 				return true;
 			}
 		}
-		
 		return false;
 	}
 	
@@ -33,8 +28,9 @@ public class Day7_2 {
 		for(int i = 0; i < supernet.length() - 2; i++){
 			if(		supernet.charAt(i) 	 == supernet.charAt(i+2) &&
 					supernet.charAt(i) 	 != supernet.charAt(i+1)){
-				
-				return true;
+				if(containsBAB(supernet.charAt(i), supernet.charAt(i+1), hypernet)){
+					return true;
+				}
 			}
 		}
 		return false;
@@ -44,18 +40,6 @@ public class Day7_2 {
 		String bab = new String(new char[]{b,a,b});
 		for(int i = 0; i < hypernet.length; i++){
 			if(hypernet[i].contains(bab)){
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	private boolean containsABBA(String input){
-		//System.out.println("Checking: " + input);
-		for(int i = 0; i < input.length() - 3; i++){
-			if(		input.charAt(i) 	== input.charAt(i+3) && 
-					input.charAt(i+1) 	== input.charAt(i+2) && 
-					input.charAt(i) 	!= input.charAt(i+1)){
 				return true;
 			}
 		}
