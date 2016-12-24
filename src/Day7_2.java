@@ -1,6 +1,6 @@
 
-public class Day7_1 {
-	Day7_1(){
+public class Day7_2 {
+	Day7_2(){
 		String[] input = new FileReader().readLines("input/Day7_1_input.txt");
 		int numValid = 0;
 		for(int i = 0; i < input.length; i++){
@@ -19,13 +19,34 @@ public class Day7_1 {
 				return false;
 			}
 		}
-		parts = getNonHypernetParts(input);
+		parts = getSupernetSequences(input);
 		for(int i = 0; i < parts.length; i++){
 			if(containsABBA(parts[i])){
 				return true;
 			}
 		}
 		
+		return false;
+	}
+	
+	private boolean containsABA(String supernet, String[] hypernet){
+		for(int i = 0; i < supernet.length() - 2; i++){
+			if(		supernet.charAt(i) 	 == supernet.charAt(i+2) &&
+					supernet.charAt(i) 	 != supernet.charAt(i+1)){
+				
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private boolean containsBAB(char a, char b, String[] hypernet){
+		String bab = new String(new char[]{b,a,b});
+		for(int i = 0; i < hypernet.length; i++){
+			if(hypernet[i].contains(bab)){
+				return true;
+			}
+		}
 		return false;
 	}
 	
@@ -56,7 +77,7 @@ public class Day7_1 {
 		return result;
 	}
 	
-	private String[] getNonHypernetParts(String input){
+	private String[] getSupernetSequences(String input){
 		String[] parts = input.split("\\[");
 		int numParts = 0;
 		for(int i = 0; i < parts.length; i++){
@@ -80,7 +101,6 @@ public class Day7_1 {
 	}
 
 	public static void main(String[] args) {
-		new Day7_1();
+		new Day7_2();
 	}
-
 }
